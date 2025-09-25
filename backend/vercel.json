@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "newer/build/index.html",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "newer/build" }
+    },
+    {
+      "src": "backend/server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "backend/solver.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "backend/server.js" },
+    { "src": "/py/(.*)", "dest": "backend/solver.py" },
+    { "src": "/(.*)", "dest": "newer/build/index.html" }
+  ]
+}
